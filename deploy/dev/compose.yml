@@ -36,12 +36,12 @@ services:
 
   frontend:
     build:
-      context: ${FRONTEND_SRC}
+      context: ${FRONTEND_SRC:-../../frontend}
       dockerfile: ${FRONTEND_DOCKERFILE:-Dockerfile.dev}
     depends_on: [backend]
     volumes:
       - type: bind
-        source: ${FRONTEND_SRC:?Set FRONTEND_SRC to the absolute path of the frontend source}
+        source: ${FRONTEND_SRC:-../../frontend}
         target: /app
       - node_modules_dev:/app/node_modules
     environment:
