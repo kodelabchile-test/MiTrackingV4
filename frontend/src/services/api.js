@@ -1,9 +1,11 @@
 // frontend/src/services/api.js
-const API_BASE = "http://localhost:5000" // backend local (Express)
+const RAW_API_BASE = import.meta.env.VITE_API_BASE || "/api"
+const API_BASE = RAW_API_BASE.endsWith("/") ? RAW_API_BASE.slice(0, -1) : RAW_API_BASE
 
 export async function apiPost(path, body) {
   try {
-    const res = await fetch(API_BASE + path, {
+    const normalizedPath = path.startsWith("/") ? path : `/${path}`
+    const res = await fetch(`${API_BASE}${normalizedPath}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include", // importante para enviar cookies de sesión
