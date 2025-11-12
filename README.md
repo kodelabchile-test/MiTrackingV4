@@ -5,7 +5,15 @@ Este repositorio contiene el frontend en React y el backend en Express/PostgreSQ
 ## Desarrollo con Docker
 
 1. Asegúrate de tener Docker y Docker Compose instalados.
-2. Lanza la pila de desarrollo desde la raíz del repositorio:
+2. Desde la raíz del repositorio exporta la ruta absoluta del frontend (o asegúrate de ejecutar el comando con `PWD` apuntando a la raíz):
+
+   ```bash
+   export FRONTEND_SRC="$(pwd)/frontend"
+   ```
+
+   En PowerShell puedes usar `setx FRONTEND_SRC "$PWD\frontend"` (recuerda abrir una nueva sesión para que el cambio tome efecto).
+
+3. Lanza la pila de desarrollo desde la raíz del repositorio:
 
    ```bash
    docker compose -f deploy/dev/compose.yml up --build
@@ -14,6 +22,7 @@ Este repositorio contiene el frontend en React y el backend en Express/PostgreSQ
    * Traefik expone los servicios en `https://localhost` (o el host que definas en la variable de entorno `DEV_HOST`) utilizando el certificado autofirmado que se encuentra en `traefik/dev.crt` y `traefik/dev.key` (definido en `traefik/tls.yml`).
    * El frontend usa Vite en modo desarrollo dentro del contenedor y recibe las peticiones HTTPS en el puerto 443 a través de Traefik.
    * El backend Express queda disponible bajo `https://localhost/api` y comparte la sesión mediante cookies seguras.
+   * Si omites definir `FRONTEND_SRC`, el contenedor de Vite no encontrará `package.json` y se reiniciará con errores `ENOENT`.
 
 ## Despliegue en producción
 

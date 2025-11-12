@@ -36,11 +36,13 @@ services:
 
   frontend:
     build:
-      context: ../../frontend
+      context: ${FRONTEND_SRC}
       dockerfile: ${FRONTEND_DOCKERFILE:-Dockerfile.dev}
     depends_on: [backend]
     volumes:
-      - ../../frontend:/app
+      - type: bind
+        source: ${FRONTEND_SRC:?Set FRONTEND_SRC to the absolute path of the frontend source}
+        target: /app
       - node_modules_dev:/app/node_modules
     environment:
       VITE_DEV_SERVER_PORT: ${VITE_DEV_SERVER_PORT:-5173}
