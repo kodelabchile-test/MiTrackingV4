@@ -11,7 +11,7 @@ Este repositorio contiene el frontend en React y el backend en Express/PostgreSQ
    docker compose -f deploy/dev/compose.yml up --build
    ```
 
-   * Traefik expone los servicios en `https://localhost` utilizando el certificado autofirmado que se encuentra en `traefik/dev.crt` y `traefik/dev.key` (definido en `traefik/tls.yml`).
+   * Traefik expone los servicios en `https://localhost` (o el host que definas en la variable de entorno `DEV_HOST`) utilizando el certificado autofirmado que se encuentra en `traefik/dev.crt` y `traefik/dev.key` (definido en `traefik/tls.yml`).
    * El frontend usa Vite en modo desarrollo dentro del contenedor y recibe las peticiones HTTPS en el puerto 443 a través de Traefik.
    * El backend Express queda disponible bajo `https://localhost/api` y comparte la sesión mediante cookies seguras.
 

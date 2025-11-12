@@ -27,7 +27,7 @@ services:
     depends_on: [db]
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.api.rule=Host(`${DEV_HOST:-localhost}`) && PathPrefix(`/api`)"
       - "traefik.http.routers.api.entrypoints=websecure"
       - "traefik.http.routers.api.tls=true"
       - "traefik.http.services.api.loadbalancer.server.port=3000"
@@ -46,7 +46,7 @@ services:
       VITE_DEV_SERVER_PORT: ${VITE_DEV_SERVER_PORT:-5173}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.front.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.front.rule=Host(`${DEV_HOST:-localhost}`) && PathPrefix(`/`)"
       - "traefik.http.routers.front.entrypoints=websecure"
       - "traefik.http.routers.front.tls=true"
       - "traefik.http.services.front.loadbalancer.server.port=5173"
