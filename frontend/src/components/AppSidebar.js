@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 
 import { AppSidebarNav } from './AppSidebarNav'
-import logo from '../assets/images/logo2v2.webp'
+import logo from '../assets/images/Logo2v2.webp'
 
 // sidebar nav config
 import navigation from '../_nav'
